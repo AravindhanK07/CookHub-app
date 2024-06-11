@@ -40,7 +40,7 @@ export const CreateRecipe = () => {
     event.preventDefault();
     try {
       await axios.post(
-        "http://localhost:3001/recipes",
+        "http://localhost:3000/recipes",
         { ...recipe },
         {
           headers: { authorization: cookies.access_token },
@@ -55,7 +55,7 @@ export const CreateRecipe = () => {
   };
 
   return (
-    <div className="create-recipe">
+    <div className="create-recipe" style={{ marginTop: "4rem" }}>
       <center>
         <h2>Create Recipe</h2>
       </center>

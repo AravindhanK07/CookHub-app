@@ -8,13 +8,6 @@ const app = express();
 
 //Middle ware
 app.use(express.json());
-app.use(
-  cors({
-    origin: ["https://deploy-mern-1whq.versel.app"],
-    methods: ["POST", "GET"],
-    credentials: true,
-  })
-);
 
 app.use("/auth", userRouter);
 app.use("/recipes", recipesRouter);
@@ -23,4 +16,4 @@ mongoose.connect(
   "mongodb+srv://AravindhanAK:Aravindhan003@recipes.2tcrgiz.mongodb.net/recipes?retryWrites=true&w=majority&appName=recipes"
 );
 
-app.listen(3001, () => console.log("server started"));
+app.listen(3000, () => console.log("server started"));

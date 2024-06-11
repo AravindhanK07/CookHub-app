@@ -29,7 +29,7 @@ const AuthForm = () => {
 
     try {
       if (isLogin) {
-        const result = await axios.post("http://localhost:3001/auth/login", {
+        const result = await axios.post("http://localhost:3000/auth/login", {
           username,
           password,
         });
@@ -38,7 +38,7 @@ const AuthForm = () => {
         window.localStorage.setItem("userID", result.data.userID);
         navigate("/");
       } else {
-        await axios.post("http://localhost:3001/auth/register", {
+        await axios.post("http://localhost:3000/auth/register", {
           username,
           password,
         });

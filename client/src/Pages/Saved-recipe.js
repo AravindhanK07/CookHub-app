@@ -10,7 +10,7 @@ const Savedrecipe = () => {
     const fetchSavedRecipe = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/recipes/savedRecipes/${userID}`
+          `http://localhost:3000/recipes/savedRecipes/${userID}`
         );
         setSavedRecipes(response.data.savedRecipes);
       } catch (err) {
@@ -22,7 +22,7 @@ const Savedrecipe = () => {
 
   const saveRecipe = async (recipeID) => {
     try {
-      const response = await axios.put("http://localhost:3001/recipes", {
+      const response = await axios.put("http://localhost:3000/recipes", {
         recipeID,
         userID,
       });
@@ -36,11 +36,11 @@ const Savedrecipe = () => {
     savedRecipes.some((recipe) => recipe._id === id);
 
   return (
-    <div className="container mt-5">
+    <div className="container" style={{ marginTop: "4rem" }}>
       <h1 className="text-center mb-4">Saved Recipes</h1>
       <div className="row">
         {savedRecipes.map((recipe) => (
-          <div className="col-md-4 mb-4" key={recipe._id}>
+          <div className="col-12 mb-4" key={recipe._id}>
             <div className="card">
               <img
                 src={recipe.imageUrl}
@@ -60,13 +60,13 @@ const Savedrecipe = () => {
                 <p className="card-text">
                   Cooking Time: {recipe.cookingTime} minutes
                 </p>
-                <button
+                {/*<button
                   onClick={() => saveRecipe(recipe._id)}
                   disabled={isRecipeSaved(recipe._id)}
                   className="btn btn-primary"
                 >
                   {isRecipeSaved(recipe._id) ? "Saved" : "Save"}
-                </button>
+                </button>*/}
               </div>
             </div>
           </div>

@@ -1,16 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useGetUserID } from "../hooks/useGetUserID";
+import { useCookies } from "react-cookie";
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
   const [savedRecipes, setSavedRecipes] = useState([]);
   const userID = useGetUserID();
+  const [cookies, setCookies] = useCookies(["access_token"]);
 
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/recipes");
+        const response = await axios.get("http://localhost:3000/recipes");
         setRecipes(response.data);
       } catch (err) {
         console.error(err);
@@ -20,7 +22,7 @@ const Home = () => {
     const fetchSavedRecipe = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/recipes/savedRecipes/ids/${userID}`
+          `http://localhost:3000/recipes/savedRecipes/ids/${userID}`
         );
         setSavedRecipes(response.data.savedRecipes);
       } catch (err) {
@@ -34,7 +36,7 @@ const Home = () => {
 
   const saveRecipe = async (recipeID) => {
     try {
-      const response = await axios.put("http://localhost:3001/recipes", {
+      const response = await axios.put("http://localhost:3000/recipes", {
         recipeID,
         userID,
       });
@@ -47,11 +49,13 @@ const Home = () => {
   const isRecipeSaved = (id) => savedRecipes.includes(id);
 
   return (
-    <div className="container mt-5">
-      <h1 className="text-center mb-4">Recipes</h1>
+    <div className="container" style={{ marginTop: "4rem" }}>
+      <h1 className="text-center mb-4">
+        {cookies.access_token ? "Recipes" : "Login to explore the recipes!!"}
+      </h1>
       <div className="row">
         {recipes.map((recipe) => (
-          <div key={recipe._id} className="col-md-4 mb-4">
+          <div key={recipe._id} className="col-12 mb-4">
             <div className="card">
               <img
                 src={recipe.imageUrl}
