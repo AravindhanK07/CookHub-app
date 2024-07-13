@@ -41,7 +41,7 @@ export const CreateRecipe = () => {
     event.preventDefault();
     try {
       await axios.post(
-        "http://localhost:3000/recipes",
+        "https://cookhub-app-backend.onrender.com/recipes",
         { ...recipe },
         {
           headers: { authorization: cookies.access_token },

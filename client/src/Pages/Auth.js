@@ -35,19 +35,25 @@ const AuthForm = () => {
 
     try {
       if (isLogin) {
-        const result = await axios.post("http://localhost:3000/auth/login", {
-          username,
-          password,
-        });
+        const result = await axios.post(
+          "https://cookhub-app-backend.onrender.com/auth/login",
+          {
+            username,
+            password,
+          }
+        );
 
         setCookies("access_token", result.data.token);
         window.localStorage.setItem("userID", result.data.userID);
         navigate("/");
       } else {
-        await axios.post("http://localhost:3000/auth/register", {
-          username,
-          password,
-        });
+        await axios.post(
+          "https://cookhub-app-backend.onrender.com/auth/register",
+          {
+            username,
+            password,
+          }
+        );
         alert("Registration Completed! Now login.");
         setIsLogin(true);
         setUsername("");

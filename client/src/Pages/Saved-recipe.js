@@ -11,7 +11,7 @@ const Savedrecipe = () => {
     const fetchSavedRecipe = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/recipes/savedRecipes/${userID}`
+          `https://cookhub-app-backend.onrender.com/recipes/savedRecipes/${userID}`
         );
         setSavedRecipes(response.data.savedRecipes);
       } catch (err) {
@@ -23,10 +23,13 @@ const Savedrecipe = () => {
 
   const saveRecipe = async (recipeID) => {
     try {
-      const response = await axios.put("http://localhost:3000/recipes", {
-        recipeID,
-        userID,
-      });
+      const response = await axios.put(
+        "https://cookhub-app-backend.onrender.com/recipes",
+        {
+          recipeID,
+          userID,
+        }
+      );
       setSavedRecipes(response.data.savedRecipes);
     } catch (err) {
       console.error(err);
