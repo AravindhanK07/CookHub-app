@@ -65,40 +65,42 @@ const Home = () => {
       <h1 className="text-center mb-4">
         {cookies.access_token ? "Recipes" : "Login to explore the recipes!!"}
       </h1>
-      <div className="row">
-        {recipes.map((recipe) => (
-          <div key={recipe._id} className="col-12 mb-4">
-            <div className="card">
-              <img
-                src={recipe.imageUrl}
-                className="card-img-top"
-                alt={recipe.name}
-              />
-              <div className="card-body">
-                <h2 className="card-title">{recipe.name}</h2>
-                <h5>Ingredients:</h5>
-                <ul className="list-unstyled">
-                  {recipe.ingredients.map((ingredient, index) => (
-                    <li key={index}>{ingredient}</li>
-                  ))}
-                </ul>
-                <h5>Instructions:</h5>
-                <p className="card-text">{recipe.instructions}</p>
-                <p className="card-text font-weight-bold">
-                  Cooking Time: {recipe.cookingTime} minutes
-                </p>
-                <button
-                  onClick={() => saveRecipe(recipe._id)}
-                  disabled={isRecipeSaved(recipe._id)}
-                  className="btn btn-primary"
-                >
-                  {isRecipeSaved(recipe._id) ? "Saved" : "Save"}
-                </button>
+      {cookies.access_token && (
+        <div className="row">
+          {recipes.map((recipe) => (
+            <div key={recipe._id} className="col-12 mb-4">
+              <div className="card">
+                <img
+                  src={recipe.imageUrl}
+                  className="card-img-top"
+                  alt={recipe.name}
+                />
+                <div className="card-body">
+                  <h2 className="card-title">{recipe.name}</h2>
+                  <h5>Ingredients:</h5>
+                  <ul className="list-unstyled">
+                    {recipe.ingredients.map((ingredient, index) => (
+                      <li key={index}>{ingredient}</li>
+                    ))}
+                  </ul>
+                  <h5>Instructions:</h5>
+                  <p className="card-text">{recipe.instructions}</p>
+                  <p className="card-text font-weight-bold">
+                    Cooking Time: {recipe.cookingTime} minutes
+                  </p>
+                  <button
+                    onClick={() => saveRecipe(recipe._id)}
+                    disabled={isRecipeSaved(recipe._id)}
+                    className="btn btn-primary"
+                  >
+                    {isRecipeSaved(recipe._id) ? "Saved" : "Save"}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </motion.div>
   );
 };
