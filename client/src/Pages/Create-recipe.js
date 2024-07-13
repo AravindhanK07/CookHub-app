@@ -3,6 +3,7 @@ import axios from "axios";
 import { useGetUserID } from "../hooks/useGetUserID";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { motion } from "framer-motion";
 
 export const CreateRecipe = () => {
   const userID = useGetUserID();
@@ -55,7 +56,13 @@ export const CreateRecipe = () => {
   };
 
   return (
-    <div className="create-recipe" style={{ marginTop: "4rem" }}>
+    <motion.div
+      className="create-recipe"
+      style={{ marginTop: "4rem" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <center>
         <h2>Create Recipe</h2>
       </center>
@@ -137,6 +144,6 @@ export const CreateRecipe = () => {
           Create Recipe
         </button>
       </form>
-    </div>
+    </motion.div>
   );
 };

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useGetUserID } from "../hooks/useGetUserID";
 import { useCookies } from "react-cookie";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -49,7 +50,13 @@ const Home = () => {
   const isRecipeSaved = (id) => savedRecipes.includes(id);
 
   return (
-    <div className="container" style={{ marginTop: "4rem" }}>
+    <motion.div
+      className="container"
+      style={{ marginTop: "4rem" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <h1 className="text-center mb-4">
         {cookies.access_token ? "Recipes" : "Login to explore the recipes!!"}
       </h1>
@@ -87,7 +94,7 @@ const Home = () => {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

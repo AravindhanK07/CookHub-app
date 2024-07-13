@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export const Auth = () => {
   return (
-    <div className="auth">
+    <motion.div
+      className="auth"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <AuthForm />
-    </div>
+    </motion.div>
   );
 };
 
@@ -20,8 +26,8 @@ const AuthForm = () => {
 
   const handleSwitch = () => {
     setIsLogin((prev) => !prev);
-    setUsername(""); // Reset username state
-    setPassword(""); // Reset password state
+    setUsername("");
+    setPassword("");
   };
 
   const handleSubmit = async (event) => {
@@ -44,16 +50,16 @@ const AuthForm = () => {
         });
         alert("Registration Completed! Now login.");
         setIsLogin(true);
-        setUsername(""); // Reset username state
-        setPassword(""); // Reset password state
+        setUsername("");
+        setPassword("");
       }
     } catch (error) {
       if (error.response) {
         const { data } = error.response;
         if (data.error) {
-          alert(data.error); // Show error message from the server
+          alert(data.error);
         } else {
-          alert("An error occurred. Please try again."); // Default error message
+          alert("An error occurred. Please try again.");
         }
       } else {
         alert("An error occurred. Please try again.");
@@ -71,7 +77,7 @@ const AuthForm = () => {
             <input
               type="text"
               id="username"
-              className="form-control smaller-input" // Added class "smaller-input"
+              className="form-control smaller-input"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
             />
@@ -81,7 +87,7 @@ const AuthForm = () => {
             <input
               type="password"
               id="password"
-              className="form-control smaller-input" // Added class "smaller-input"
+              className="form-control smaller-input"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />

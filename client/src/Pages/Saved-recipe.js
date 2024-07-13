@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useGetUserID } from "../hooks/useGetUserID";
+import { motion } from "framer-motion";
 
 const Savedrecipe = () => {
   const [savedRecipes, setSavedRecipes] = useState([]);
@@ -36,7 +37,13 @@ const Savedrecipe = () => {
     savedRecipes.some((recipe) => recipe._id === id);
 
   return (
-    <div className="container" style={{ marginTop: "4rem" }}>
+    <motion.div
+      className="container"
+      style={{ marginTop: "4rem" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <h1 className="text-center mb-4">Saved Recipes</h1>
       <div className="row">
         {savedRecipes.map((recipe) => (
@@ -72,7 +79,7 @@ const Savedrecipe = () => {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
