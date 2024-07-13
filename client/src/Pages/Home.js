@@ -65,7 +65,7 @@ const Home = () => {
       <h1 className="text-center mb-4">
         {cookies.access_token ? "Recipes" : "Login to explore the recipes!!"}
       </h1>
-      <div className="row">
+      {cookies.access_token && (<div className="row">
         {recipes.map((recipe) => (
           <div key={recipe._id} className="col-12 mb-4">
             <div className="card">
@@ -98,7 +98,7 @@ const Home = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div>)}
     </motion.div>
   );
 };
